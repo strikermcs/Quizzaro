@@ -1,0 +1,4 @@
+<template>
+    MainLayout
+    <RouterView />
+</template>
