@@ -17,7 +17,20 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/user',
         name: 'empty-layout',
-        component: () => import('../layouts/EmptyLayout.vue') 
+        component: () => import('../layouts/AuthLayout.vue'),
+        children: [
+            {
+                path: '/user/register',
+                name: 'register-page',
+                component: () => import('../views/Register.vue')
+            },
+
+            {
+                path: '/user/login',
+                name: 'login-page',
+                component: () => import('../views/Login.vue')
+            }
+        ] 
     }
 
 ]
