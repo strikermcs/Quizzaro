@@ -8,7 +8,9 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AuthTemplate: typeof import('./src/components/auth/authTemplate.vue')['default']
+    ElButtom: typeof import('element-plus/es')['ElButtom']
     ElButton: typeof import('element-plus/es')['ElButton']
+    'ElButton@': typeof import('element-plus/es')['ElButton@']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']

@@ -1,0 +1,18 @@
+{
+    "LoginCardHeader": "Welcome Back!",
+    "LoginCardEmailFieldLabel": "Email:",
+    "LoginCardEmailFieldPlaceholder": "Please enter your email:",
+    "LoginCardPasswordFieldLabel": "Password:",
+    "LoginCardPasswordFieldPlaceholder": "Please input password",
+    "LoginCardSubmitButton": "Login",
+    "LoginCardRegisterLink": "Create an Account!",
+    "RegisterCardHeader": "Create an Account",
+    "RegisterCardEmailFieldLabel": "Email:",
+    "RegisterCardEmailFieldPlaceholder": "Please enter your email:",
+    "RegisterCardPasswordFieldLabel": "Password:",
+    "RegisterCardPasswordFieldPlaceholder": "Please input password",
+    "RegisterCardRepeadPasswordFieldLabel": "Repead Password:",
+    "RegisterCardRepeadPasswordFieldPlaceholder": "Please repead password",
+    "RegisterCardSubmitButton": "Register",
+    "RegisterCardLoginLink": "Already have an account? Login!"
+}   

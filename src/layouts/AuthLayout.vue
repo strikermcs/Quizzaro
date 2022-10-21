@@ -4,9 +4,9 @@ import logo from '../assets/quizzaro.png'
 
 <template>
    <div class="authpage">
-        <div class="auth-header">
+        <router-link to="/welcome" class="auth-header">
             <el-image style="width: 250px;" :src="logo"  />
-        </div>
+        </router-link>
         <div class="authcontent">
             <RouterView />
         </div>  

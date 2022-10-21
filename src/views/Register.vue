@@ -17,7 +17,7 @@ import AuthTemplate from '../components/auth/authTemplate.vue'
 
 <template>
     <AuthTemplate>
-        <template #card-header>Create an Account</template>
+        <template #card-header>{{$t('RegisterCardHeader')}}</template>
         <template #content-image>
             <el-image style="height: 400px" :src="dog"/>
         </template>
@@ -28,34 +28,34 @@ import AuthTemplate from '../components/auth/authTemplate.vue'
                 :model="registerForm"
                 style="min-width: 300px"
                 >
-                    <el-form-item label="Email:">
+                    <el-form-item :label="$t('RegisterCardEmailFieldLabel')">
                         <el-input 
                         type="email"
-                        placeholder="Please input email:"
+                        :placeholder="$t('RegisterCardEmailFieldPlaceholder')"
                         v-model="registerForm.email"/>
                     </el-form-item>
-                    <el-form-item label="Password:">
+                    <el-form-item :label="$t('RegisterCardPasswordFieldLabel')">
                         <el-input 
                         type="password"
-                        placeholder="Please input password"
+                        :placeholder="$t('RegisterCardPasswordFieldPlaceholder')"
                         v-model="registerForm.password"
                         show-password
                         />
                     </el-form-item>
-                    <el-form-item label="Repead Password:">
+                    <el-form-item :label="$t('RegisterCardRepeadPasswordFieldLabel')">
                         <el-input  
                         type="password" 
-                        placeholder="Please repead password"
+                        :placeholder="$t('RegisterCardRepeadPasswordFieldPlaceholder')"
                         v-model="registerForm.rePassword"
                         show-password/>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">Register</el-button>
+                        <el-button type="primary" @click="onSubmit">{{$t('RegisterCardSubmitButton')}}</el-button>
                     </el-form-item>
                 </el-form>
         </template>
         <template #content-link>
-            <RouterLink to="/user/login">Already have an account? Login!</RouterLink>
+            <RouterLink to="/user/login">{{$t('RegisterCardLoginLink')}}</RouterLink>
         </template>
     </AuthTemplate>
 </template>

@@ -17,7 +17,7 @@ const onSubmit = () => {
 
 <template>
      <AuthTemplate>
-        <template #card-header>Welcome Back!</template>
+        <template #card-header>{{$t('LoginCardHeader')}}</template>
         <template #content-image>
             <el-image style="height: 400px" :src="dog"/>
         </template>
@@ -28,27 +28,27 @@ const onSubmit = () => {
                 :model="loginForm"
                 style="min-width: 300px"
                 >
-                    <el-form-item label="Email:">
+                    <el-form-item :label="$t('LoginCardEmailFieldLabel')">
                         <el-input 
                         type="email"
-                        placeholder="Please input email:"
+                        :placeholder="$t('LoginCardEmailFieldPlaceholder')"
                         v-model="loginForm.email"/>
                     </el-form-item>
-                    <el-form-item label="Password:">
+                    <el-form-item :label="$t('LoginCardPasswordFieldLabel')">
                         <el-input 
                         type="password"
-                        placeholder="Please input password"
+                        :placeholder="$t('LoginCardPasswordFieldPlaceholder')"
                         v-model="loginForm.password"
                         show-password
                         />
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">Login</el-button>
+                        <el-button type="primary" @click="onSubmit">{{$t('LoginCardSubmitButton')}}</el-button>
                     </el-form-item>
                 </el-form>
         </template>
         <template #content-link>
-            <RouterLink to="/user/register">Create an Account!</RouterLink>
+            <RouterLink to="/user/register">{{$t('LoginCardRegisterLink')}}</RouterLink>
         </template>
     </AuthTemplate>
 </template>
