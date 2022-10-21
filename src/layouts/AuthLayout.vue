@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import logo from '../assets/quizzaro.png'
+import LocaleSelect from '../components/UI/LocaleSelect.vue'
 </script>
 
 <template>
@@ -9,6 +10,9 @@ import logo from '../assets/quizzaro.png'
         </router-link>
         <div class="authcontent">
             <RouterView />
+        </div>
+        <div class="locale">
+            <LocaleSelect />
         </div>  
    </div>
 </template>
@@ -32,5 +36,11 @@ import logo from '../assets/quizzaro.png'
 
 .authcontent {
     z-index: 12;
+}
+
+.locale {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 </style>

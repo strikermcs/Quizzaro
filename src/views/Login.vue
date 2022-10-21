@@ -1,15 +1,32 @@
 <script setup lang="ts">
 import AuthTemplate from '../components/auth/authTemplate.vue'
 import dog from '../assets/dog2.jpeg'
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, minLength } from '@vuelidate/validators'
+import ErrorField from '../components/UI/ErrorField.vue'
 
 const loginForm = reactive({
     email: '',
     password: ''
 })
 
-const onSubmit = () => {
-    console.log(loginForm)
+const rules = computed(() => {
+    return {
+        email: { required, email },
+        password: { required, minLength: minLength(6) }
+    }
+})
+
+const v$ = useVuelidate(rules, loginForm)
+
+const onSubmit = async () => {
+    const result = await v$.value.$validate()
+    if(result){
+        alert('ok')
+    }else {
+        alert('error')
+    }
 }
 
 </script>
@@ -33,6 +50,7 @@ const onSubmit = () => {
                         type="email"
                         :placeholder="$t('LoginCardEmailFieldPlaceholder')"
                         v-model="loginForm.email"/>
+                        <ErrorField :errors="v$.email.$errors"/>
                     </el-form-item>
                     <el-form-item :label="$t('LoginCardPasswordFieldLabel')">
                         <el-input 
@@ -41,6 +59,7 @@ const onSubmit = () => {
                         v-model="loginForm.password"
                         show-password
                         />
+                        <ErrorField :errors="v$.password.$errors"/>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">{{$t('LoginCardSubmitButton')}}</el-button>

@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import dog from '../assets/dog1.jpeg'
 import AuthTemplate from '../components/auth/authTemplate.vue'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, sameAs, minLength } from '@vuelidate/validators'
+import ErrorField from '../components/UI/ErrorField.vue'
 
     const registerForm = reactive({
         email: '',
@@ -9,8 +12,23 @@ import AuthTemplate from '../components/auth/authTemplate.vue'
         rePassword: ''
     })
 
-    const onSubmit = () => {
-        console.log(registerForm)
+    const rules = computed(() => {
+        return {
+            email: { required, email },
+            password: { required, minLength: minLength(6) },
+            rePassword: { required, sameAs: sameAs(registerForm.password) }
+        }
+    })
+
+    const v$ = useVuelidate(rules, registerForm)
+
+    const onSubmit = async() => {
+        const result = await v$.value.$validate()
+        if(result){
+            alert("ok")
+        }else {
+            alert("error")
+        } 
     }
 
 </script>
@@ -32,7 +50,9 @@ import AuthTemplate from '../components/auth/authTemplate.vue'
                         <el-input 
                         type="email"
                         :placeholder="$t('RegisterCardEmailFieldPlaceholder')"
-                        v-model="registerForm.email"/>
+                        v-model="registerForm.email"
+                        />
+                       <ErrorField :errors="v$.email.$errors"/>
                     </el-form-item>
                     <el-form-item :label="$t('RegisterCardPasswordFieldLabel')">
                         <el-input 
@@ -41,6 +61,7 @@ import AuthTemplate from '../components/auth/authTemplate.vue'
                         v-model="registerForm.password"
                         show-password
                         />
+                        <ErrorField :errors="v$.password.$errors"/>
                     </el-form-item>
                     <el-form-item :label="$t('RegisterCardRepeadPasswordFieldLabel')">
                         <el-input  
@@ -48,6 +69,7 @@ import AuthTemplate from '../components/auth/authTemplate.vue'
                         :placeholder="$t('RegisterCardRepeadPasswordFieldPlaceholder')"
                         v-model="registerForm.rePassword"
                         show-password/>
+                        <ErrorField :errors="v$.rePassword.$errors"/>  
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">{{$t('RegisterCardSubmitButton')}}</el-button>

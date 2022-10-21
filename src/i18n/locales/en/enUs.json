@@ -14,5 +14,11 @@
     "RegisterCardRepeadPasswordFieldLabel": "Repead Password:",
     "RegisterCardRepeadPasswordFieldPlaceholder": "Please repead password",
     "RegisterCardSubmitButton": "Register",
-    "RegisterCardLoginLink": "Already have an account? Login!"
+    "RegisterCardLoginLink": "Already have an account? Login!",
+    "email-email": "Value is not a valid email address",
+    "email-required": "Value is required",
+    "password-required": "Value is required",
+    "rePassword-required": "Value is required",
+    "password-minLength": "Password must contain at least 6 characters",
+    "rePassword-sameAs": "Passwords must match" 
 }   
