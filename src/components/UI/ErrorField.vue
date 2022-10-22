@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ErrorObject } from '@vuelidate/core';
-import { defineProps } from 'vue'
-
 
 const props = defineProps({
     errors: Array<ErrorObject>

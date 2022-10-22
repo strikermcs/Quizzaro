@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import AuthTemplate from '../components/auth/authTemplate.vue'
 import dog from '../assets/dog2.jpeg'
-import { reactive, computed } from 'vue'
+import { reactive, computed, watch } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import ErrorField from '../components/UI/ErrorField.vue'
+import { useUserStore } from '../store/user'
+import { useRouter } from 'vue-router'
+import { useRestoreActive } from 'element-plus'
+
+const router = useRouter()
+const userStore = useUserStore()
 
 const loginForm = reactive({
     email: '',
@@ -23,11 +29,15 @@ const v$ = useVuelidate(rules, loginForm)
 const onSubmit = async () => {
     const result = await v$.value.$validate()
     if(result){
-        alert('ok')
-    }else {
-        alert('error')
+       userStore.login(loginForm.email, loginForm.password)
     }
 }
+
+watch(() => userStore.user, (user) => {
+    if(user){
+        router.push('/')
+    }
+})
 
 </script>
 

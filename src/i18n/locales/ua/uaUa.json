@@ -20,5 +20,11 @@
     "password-required": "Пароль не повинен бути пустим",
     "rePassword-required": "Пароль не повинен бути пустим",
     "password-minLength": "Пароль повинен мати не менше 6 символів",
-    "rePassword-sameAs": "Паролі не збігаються"  
+    "rePassword-sameAs": "Паролі не збігаються",
+    "auth/wrong-password": "Невірний пароль",
+    "auth/user-not-found": "Користувача не знайдено",
+    "auth/email-already-in-use": "Користувач з такою поштою вже зареєстрований",
+    "Success": "Успіх",
+    "UserSuccessfullyCreated": "Користувач успішно створений",
+    "Error": "Помилка"  
 }   

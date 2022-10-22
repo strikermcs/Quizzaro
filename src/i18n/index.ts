@@ -5,6 +5,7 @@ import uaUA from './locales/ua/uaUa.json'
 type MessageSchema = typeof enUS
 
 const i18n = createI18n<[MessageSchema], 'en-US' | 'ua-UA'>({
+    legacy: false,
     locale: 'ua-UA',
     fallbackLocale: 'en-US',
     messages: {
