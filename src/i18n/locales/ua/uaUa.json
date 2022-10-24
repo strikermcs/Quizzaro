@@ -26,5 +26,6 @@
     "auth/email-already-in-use": "Користувач з такою поштою вже зареєстрований",
     "Success": "Успіх",
     "UserSuccessfullyCreated": "Користувач успішно створений",
-    "Error": "Помилка"  
+    "Error": "Помилка",
+    "MainMenuCreateQuiz": "Створити новий квіз"  
 }   

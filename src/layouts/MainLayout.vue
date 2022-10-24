@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import MainMenu from '../components/MainPage/MainMenu/MainMenu.vue'
   import { auth } from '../firebase/firebase'
   import { onAuthStateChanged } from "firebase/auth";
   import { useUserStore } from '../store/user'
@@ -17,20 +18,33 @@
     }
         
   })  
-
+  
 </script>
 
 
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header>Header</el-header>
-      <el-container>
-        <el-aside width="200px">Aside</el-aside>
-        <el-main>Main
-          <RouterView />
-        </el-main>
-      </el-container>
+      <el-aside class="aside-menu">
+        <MainMenu />
+      </el-aside>
+      <el-main >
+        <RouterView />
+      </el-main>
     </el-container>
   </div>
 </template>
+
+<style scoped>
+.aside-menu {
+  width: 200px;
+  transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 1000px) {
+  .aside-menu {
+    position: absolute;
+    left: -200px;
+  }
+}
+</style>

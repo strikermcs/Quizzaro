@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { reactive, computed, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import dog from '../assets/dog1.jpeg'
 import AuthTemplate from '../components/auth/authTemplate.vue'
-import { useVuelidate } from '@vuelidate/core'
-import { required, email, sameAs, minLength } from '@vuelidate/validators'
-import ErrorField from '../components/UI/ErrorField.vue'
 import { useUserStore } from '../store/user'
 import { useRouter } from 'vue-router'
+import type { FormInstance, FormRules } from 'element-plus'
+import { useI18n } from "vue-i18n";
 
+    const { t } = useI18n()
     const router = useRouter()
-    const userStore = useUserStore() 
+    const userStore = useUserStore()
+    const registerFormRef = ref<FormInstance>() 
 
     const registerForm = reactive({
         email: '',
@@ -17,21 +18,65 @@ import { useRouter } from 'vue-router'
         rePassword: ''
     })
 
-    const rules = computed(() => {
-        return {
-            email: { required, email },
-            password: { required, minLength: minLength(6) },
-            rePassword: { required, sameAs: sameAs(registerForm.password) }
+
+    const checkPassword = (rule: any, value: any, callback: any) => {
+        if (value === '') {
+            callback(new Error('Please input the password again'))
+        } else if (value !== registerForm.password) {
+            callback(new Error(t('rePassword-sameAs')))
+        } else {
+            callback()
         }
+    }
+
+    const rules = reactive<FormRules>({
+        email: [
+            {
+                type: 'email', 
+                required: true,
+                message: t('email-email'),
+                trigger: 'change',
+            }
+        ],
+        password: [
+            {
+                type: 'string',
+                required: true,
+                message: t('password-required'),
+                trigger: 'change'
+            },
+            
+            {
+                min: 6, 
+                message: t('password-minLength'),
+                trigger: 'change' 
+            }
+        ],
+        rePassword: [
+            {
+                type: 'string',
+                required: true,
+                message: t('password-required'),
+                trigger: 'change'
+            },
+
+            {
+                validator: checkPassword,
+                trigger: 'change'
+            }
+        ]
     })
+   
 
-    const v$ = useVuelidate(rules, registerForm)
-
-    const onSubmit = async() => {
-        const result = await v$.value.$validate()
-        if(result) {
-           userStore.register(registerForm.email, registerForm.password)
-        }
+    
+    const onSubmit = async(formEl: FormInstance | undefined) => {
+        if(!formEl) return
+        await formEl.validate((valid,fields) => {
+            if(valid) {
+                userStore.register(registerForm.email, registerForm.password)
+            }
+        })
+        
     }
 
     watch(() => userStore.user, (user) => {
@@ -50,38 +95,37 @@ import { useRouter } from 'vue-router'
         </template>
         <template #content-form>
             <el-form
+                ref="registerFormRef"
                 label-position="top"
                 label-width="100px"
                 :model="registerForm"
+                :rules="rules"
                 style="min-width: 300px"
                 >
-                    <el-form-item :label="$t('RegisterCardEmailFieldLabel')">
+                    <el-form-item :label="$t('RegisterCardEmailFieldLabel')" prop="email">
                         <el-input 
                         type="email"
                         :placeholder="$t('RegisterCardEmailFieldPlaceholder')"
                         v-model="registerForm.email"
                         />
-                       <ErrorField :errors="v$.email.$errors"/>
                     </el-form-item>
-                    <el-form-item :label="$t('RegisterCardPasswordFieldLabel')">
+                    <el-form-item :label="$t('RegisterCardPasswordFieldLabel')" prop="password">
                         <el-input 
                         type="password"
                         :placeholder="$t('RegisterCardPasswordFieldPlaceholder')"
                         v-model="registerForm.password"
                         show-password
                         />
-                        <ErrorField :errors="v$.password.$errors"/>
                     </el-form-item>
-                    <el-form-item :label="$t('RegisterCardRepeadPasswordFieldLabel')">
+                    <el-form-item :label="$t('RegisterCardRepeadPasswordFieldLabel')" prop="rePassword">
                         <el-input  
                         type="password" 
                         :placeholder="$t('RegisterCardRepeadPasswordFieldPlaceholder')"
                         v-model="registerForm.rePassword"
                         show-password/>
-                        <ErrorField :errors="v$.rePassword.$errors"/>  
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">{{$t('RegisterCardSubmitButton')}}</el-button>
+                        <el-button type="primary" @click="onSubmit(registerFormRef)">{{$t('RegisterCardSubmitButton')}}</el-button>
                     </el-form-item>
                 </el-form>
         </template>

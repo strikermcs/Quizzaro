@@ -42,6 +42,11 @@ export const useUserStore = defineStore('user', {
                 const errorCode = error.code;
                 notify.SetNofication('Error', errorCode, 'error') 
             });
+        },
+
+        singOut() {
+            auth.signOut()
+            this.user = null 
         }
     },
 

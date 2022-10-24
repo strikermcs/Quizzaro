@@ -1,36 +1,56 @@
 <script setup lang="ts">
 import AuthTemplate from '../components/auth/authTemplate.vue'
 import dog from '../assets/dog2.jpeg'
-import { reactive, computed, watch } from 'vue'
-import { useVuelidate } from '@vuelidate/core'
-import { required, email, minLength } from '@vuelidate/validators'
-import ErrorField from '../components/UI/ErrorField.vue'
+import { reactive, watch, ref } from 'vue'
 import { useUserStore } from '../store/user'
 import { useRouter } from 'vue-router'
-import { useRestoreActive } from 'element-plus'
+import type { FormInstance, FormRules } from 'element-plus'
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const router = useRouter()
 const userStore = useUserStore()
+const loginFormRef = ref<FormInstance>()
 
 const loginForm = reactive({
     email: '',
     password: ''
 })
 
-const rules = computed(() => {
-    return {
-        email: { required, email },
-        password: { required, minLength: minLength(6) }
-    }
+
+const rules = reactive<FormRules>({
+    email: [
+        {
+            type: 'email', 
+            required: true,
+            message: t('email-email'),
+            trigger: 'change',
+        }
+    ],
+    password: [
+        {
+            type: 'string',
+            required: true,
+            message: t('password-required'),
+            trigger: 'change'
+        },
+        
+        {
+            min: 6, 
+            message: t('password-minLength'),
+            trigger: 'change' 
+        }
+    ]
 })
 
-const v$ = useVuelidate(rules, loginForm)
 
-const onSubmit = async () => {
-    const result = await v$.value.$validate()
-    if(result){
-       userStore.login(loginForm.email, loginForm.password)
-    }
+const onSubmit = async (formEl: FormInstance | undefined) => {
+    if(!formEl) return
+    await formEl.validate((valid, fields) => {
+        if(valid){
+            userStore.login(loginForm.email, loginForm.password)
+        }
+    })
 }
 
 watch(() => userStore.user, (user) => {
@@ -50,29 +70,29 @@ watch(() => userStore.user, (user) => {
         </template>
         <template #content-form>
             <el-form
+                ref="loginFormRef"
                 label-position="top"
                 label-width="100px"
                 :model="loginForm"
+                :rules="rules"
                 style="min-width: 300px"
                 >
-                    <el-form-item :label="$t('LoginCardEmailFieldLabel')">
+                    <el-form-item :label="$t('LoginCardEmailFieldLabel')"  prop="email">
                         <el-input 
                         type="email"
                         :placeholder="$t('LoginCardEmailFieldPlaceholder')"
                         v-model="loginForm.email"/>
-                        <ErrorField :errors="v$.email.$errors"/>
                     </el-form-item>
-                    <el-form-item :label="$t('LoginCardPasswordFieldLabel')">
+                    <el-form-item :label="$t('LoginCardPasswordFieldLabel')"  prop="password">
                         <el-input 
                         type="password"
                         :placeholder="$t('LoginCardPasswordFieldPlaceholder')"
                         v-model="loginForm.password"
                         show-password
                         />
-                        <ErrorField :errors="v$.password.$errors"/>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">{{$t('LoginCardSubmitButton')}}</el-button>
+                        <el-button type="primary" @click="onSubmit(loginFormRef)">{{$t('LoginCardSubmitButton')}}</el-button>
                     </el-form-item>
                 </el-form>
         </template>

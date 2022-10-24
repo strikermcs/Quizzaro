@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '',
                 name: 'main-page',
-                component: () => import('../views/MainPage.vue')
+                component: () => import('../views/MainLayout/CreateNewQuiz.vue')
             }
         ]
     },

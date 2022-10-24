@@ -26,5 +26,6 @@
     "auth/email-already-in-use": "Email is already in use",
     "Success": "Success",
     "UserSuccessfullyCreated": "User successfully created",
-    "Error": "Error"   
+    "Error": "Error" ,
+    "MainMenuCreateQuiz": "Create new Quiz"  
 }   
