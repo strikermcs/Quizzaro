@@ -15,6 +15,8 @@
     "RegisterCardRepeadPasswordFieldPlaceholder": "Please repead password",
     "RegisterCardSubmitButton": "Register",
     "RegisterCardLoginLink": "Already have an account? Login!",
+    "TheFieldMustNotBeEmpty": "The field must not be empty",
+    "NameMinLength": "Name is too short",
     "email-email": "Value is not a valid email address",
     "email-required": "Value is required",
     "password-required": "Value is required",
@@ -27,5 +29,9 @@
     "Success": "Success",
     "UserSuccessfullyCreated": "User successfully created",
     "Error": "Error" ,
+    "CreateNewQuiz": "Create New Quiz",
+    "CreateNewQuizName": "Enter a Quiz Name:",
+    "CreateNewQuizTheme": "Enter a Quiz Theme:",
+    "Create": "Create",
     "MainMenuCreateQuiz": "Create new Quiz"  
 }   

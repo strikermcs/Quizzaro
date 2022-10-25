@@ -15,6 +15,8 @@
     "RegisterCardRepeadPasswordFieldPlaceholder": "Введіть пароль",
     "RegisterCardSubmitButton": "Регістрація",
     "RegisterCardLoginLink": "Вже маєте аккаунт? Увійти!",
+    "TheFieldMustNotBeEmpty": "Поле не повинно бути пустим",
+    "NameMinLength": "Недостатньо символів",
     "email-email": "Невірна адреса пошти",
     "email-required": "Пошта не повина бути пустою",
     "password-required": "Пароль не повинен бути пустим",
@@ -27,5 +29,9 @@
     "Success": "Успіх",
     "UserSuccessfullyCreated": "Користувач успішно створений",
     "Error": "Помилка",
+    "CreateNewQuiz": "Створити новий квіз",
+    "CreateNewQuizName": "Введіть ім'я квізу:",
+    "CreateNewQuizTheme": "Введіть тематику квізу:",
+    "Create": "Створити",
     "MainMenuCreateQuiz": "Створити новий квіз"  
 }   
