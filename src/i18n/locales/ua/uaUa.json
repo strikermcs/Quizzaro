@@ -49,5 +49,10 @@
     "DeleteQuizQuestion": "Видалити",
     "PublishQuiz": "Публікувати", 
     "Create": "Створити",
-    "MainMenuCreateQuiz": "Створити новий квіз"  
+    "MyQuizzesList": "Мої квізи",
+    "MyQuizzesTableItemName": "Назва квізу:",
+    "MyQuizzesTableItemTheme": "Тема:",
+    "MyQuizzesTableSearchPlaceholder": "Пошук...",
+    "MainMenuCreateQuiz": "Створити новий квіз",
+    "MainMenuMyQuizes": "Мої квізи"    
 }   

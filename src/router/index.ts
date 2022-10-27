@@ -8,8 +8,14 @@ const routes: Array<RouteRecordRaw> = [
         children: [
             {
                 path: '',
-                name: 'main-page',
+                name: 'create-quiz',
                 component: () => import('../views/MainLayout/CreateNewQuiz.vue')
+            },
+
+            {
+                path: '/my_quizes',
+                name: 'my-quizes',
+                component: () => import('../views/MainLayout/MyQuizes.vue')
             }
         ]
     },

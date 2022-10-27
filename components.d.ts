@@ -32,6 +32,9 @@ declare module '@vue/runtime-core' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
     ErrorField: typeof import('./src/components/UI/ErrorField.vue')['default']
     Header: typeof import('./src/components/MainPage/Header/Header.vue')['default']
@@ -40,9 +43,13 @@ declare module '@vue/runtime-core' {
     MainCard: typeof import('./src/components/MainPage/CreateQuiz/MainCard.vue')['default']
     MainMenu: typeof import('./src/components/MainPage/MainMenu/MainMenu.vue')['default']
     MainMenuButtons: typeof import('./src/components/UI/mainMenuButtons.vue')['default']
+    MyQuizzesList: typeof import('./src/components/MainPage/MyQuizzesList/MyQuizzesList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ToggleThemeButton: typeof import('./src/components/UI/ToggleThemeButton.vue')['default']
     ToogleThemeButton: typeof import('./src/components/UI/ToogleThemeButton.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

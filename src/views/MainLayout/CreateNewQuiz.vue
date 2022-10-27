@@ -49,12 +49,3 @@ const publishQuizHandle =  async (questions: IQuestion[]) => {
         <AddQuestionsCard :quizName="quiz.name" @publishQuiz="publishQuizHandle" v-else/>
     </div>
 </template>
-
-<style scoped>
-    .main-content{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* height: 100vh; */
-    }
-</style>

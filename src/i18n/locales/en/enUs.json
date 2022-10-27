@@ -49,5 +49,10 @@
     "DeleteQuizQuestion": "Delete",
     "PublishQuiz": "Publish", 
     "Create": "Create",
-    "MainMenuCreateQuiz": "Create new Quiz"  
+    "MyQuizzesList": "My Quizzes",
+    "MyQuizzesTableItemName": "Name:",
+    "MyQuizzesTableItemTheme": "Theme:",
+    "MyQuizzesTableSearchPlaceholder": "Type to search",
+    "MainMenuCreateQuiz": "Create new Quiz",
+    "MainMenuMyQuizes": "My quizzes"  
 }   

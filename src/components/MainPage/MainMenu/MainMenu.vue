@@ -3,12 +3,7 @@ import { menuList } from './menulist'
 import MenuButtons from '@/components/UI/mainMenuButtons.vue'
 import logo from '@/assets/quizzaro.png' 
 
-// const handleOpen = (key: string, keyPath: string[]) => {
-//   console.log(key, keyPath)
-// }
-// const handleClose = (key: string, keyPath: string[]) => {
-//   console.log(key, keyPath)
-// }
+
 </script>
 
 
@@ -19,13 +14,14 @@ import logo from '@/assets/quizzaro.png'
         class="el-menu-vertical"
         default-active="1"
         text-color="#fff"
-        @open="handleOpen"
-        @close="handleClose"
+        router
       >
       <div class="menu-header">
         <el-image :src="logo" style="width: 180px"/>
       </div>
-        <el-menu-item v-for="item in menuList" :key="item.id" :index="item.id">
+        <el-menu-item v-for="item in menuList" :key="item.id" :index="item.id"
+        :route="item.route"
+        >
           <el-icon><component :is="item.icon"/></el-icon>
           <span>{{$t(item.title)}}</span>
         </el-menu-item>

@@ -6,6 +6,7 @@ import { Delete } from '@element-plus/icons-vue'
 import { useI18n } from "vue-i18n";
 import { useNotificationStore } from '@/store/notification';
 import { IAnswer, IQuestion } from '@/interfaces/quiz.interfaces';
+import { validateAnswers } from '@/common/validations';
 
 const { t } = useI18n()
 
@@ -70,38 +71,13 @@ const addQuizQuestion = (el : FormInstance | undefined): void => {
     if (!el) return
 
     el.validate((valid) => {
-        if(valid && validateAnswers()) {
+        if(valid && validateAnswers(addQuestionForm.answers)) {
             quizQuestions.push({question: addQuestionForm.question, answers: addQuestionForm.answers})
             treeData[0].children?.push({label: `${t('Question')} ${treeData[0].children.length + 1}`})
             clearQuestionForm()
         }
     })
 }
-
-const validateAnswers = (): boolean => {
-    let correctAnswers = 0
-    let emptyFields = 0
-    addQuestionForm.answers.forEach(answer => {
-       
-        if(answer.answer.trim().length === 0) {
-           emptyFields++
-        }
-        if(answer.correctAnswer){
-            correctAnswers++
-        }
-    })
-
-    if(emptyFields > 0) {
-        notify.SetNofication(t('Error'), t('AnswersFieldsDontBeEmpty'), 'error')
-        return false
-    }
-    if (correctAnswers === 0){
-        notify.SetNofication(t('Error'), t('OneAnswerMustBeRigth'), 'error')
-        return false
-    }
-
-    return true
-} 
 
 
 const handleNodeClick = (data: ITree): void => {
@@ -123,7 +99,7 @@ const EditQuestionHandler = (): void => {
     if(currentQuestionIndex.value !== -1) {
         quizQuestions[currentQuestionIndex.value].question = addQuestionForm.question
         quizQuestions[currentQuestionIndex.value].answers = addQuestionForm.answers
-        notify.SetNofication(t('Success'), t('EditQuizQuestionSuccess'), 'success')
+        notify.SetNofication('Success', 'EditQuizQuestionSuccess', 'success')
     }
 }
 
@@ -132,7 +108,7 @@ const DeleteQuestionHandler = (): void => {
         quizQuestions.splice(currentQuestionIndex.value, 1)
         treeData[0].children!.pop()
         clearQuestionForm()
-        notify.SetNofication(t('Success'), t('DeleteQuizQuestionSuccess'), 'success')
+        notify.SetNofication('Success', 'DeleteQuizQuestionSuccess', 'success')
     }
 }
 
@@ -179,7 +155,7 @@ const publishQuizHandle = (): void => {
                     </el-form-item>
                     <TransitionGroup name="list" tag="p">
                         <el-form-item
-                        v-for="(answer, index) in addQuestionForm.answers" :key="answer.key"
+                        v-for="answer in addQuestionForm.answers" :key="answer.key"
                         class="answer-item-form" 
                         :label="$t('AddQuizAnswer')" 
                         >

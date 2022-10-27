@@ -4,7 +4,8 @@
   import { onAuthStateChanged } from "firebase/auth";
   import { useUserStore } from '../store/user'
   import { useRouter } from 'vue-router'
-
+  import { onMounted } from 'vue'
+ 
   const router = useRouter()
   const userStore = useUserStore()
 
@@ -17,7 +18,13 @@
         router.push('/welcome')
     }
         
-  })  
+  })
+  
+  onMounted(() => {
+    if(userStore.user) {
+      router.push('/')
+    }
+  })
   
 </script>
 

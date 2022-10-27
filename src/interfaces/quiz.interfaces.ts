@@ -16,5 +16,6 @@ export interface IQuiz {
 }
 
 export interface IQuizDb extends IQuiz {
+    id?: string
     userId: string
 }
