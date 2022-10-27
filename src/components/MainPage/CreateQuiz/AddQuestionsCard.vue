@@ -4,7 +4,8 @@ import type { FormInstance, FormRules } from 'element-plus'
 import MainCard from './MainCard.vue'
 import { Delete } from '@element-plus/icons-vue'
 import { useI18n } from "vue-i18n";
-import { useNotificationStore } from '../../../store/notification';
+import { useNotificationStore } from '@/store/notification';
+import { IAnswer, IQuestion } from '@/interfaces/quiz.interfaces';
 
 const { t } = useI18n()
 
@@ -13,18 +14,9 @@ interface ITree {
   children?: ITree[]
 }
 
-interface IAnswer {
-    key: number
-    answer: string,
-    correctAnswer: boolean
-}
-
-interface IAddQuestionForm {
-    question: string
-    answers: IAnswer[]
-}  
 
 const props = defineProps(['quizName'])
+const emit  = defineEmits(['publishQuiz'])
 const addQuestionFormRef = ref<FormInstance>()
 const isPreview = ref(false)
 const notify = useNotificationStore()
@@ -44,16 +36,21 @@ const treeData =  reactive<ITree[]>(
     ]
 )
 
-const quizQuestions = reactive<IAddQuestionForm[]>([])
+const quizQuestions = reactive<IQuestion[]>([])
 
-const addQuestionForm = reactive<IAddQuestionForm>({
+const addQuestionForm = reactive<IQuestion>({
     question: '',
     answers: []
 })
 
+const clearQuestionForm = (): void => {
+    addQuestionForm.answers = []
+    addQuestionForm.question = ''
+    isPreview.value = false
+}
 
 
-const addAnswerHandle = () => {
+const addAnswerHandle = (): void => {
     addQuestionForm.answers.push(
         {
             key: Date.now(), 
@@ -62,23 +59,52 @@ const addAnswerHandle = () => {
         })
 }
 
-const removeAnswerItem = (item : IAnswer) => {
+const removeAnswerItem = (item : IAnswer): void => {
     const index = addQuestionForm.answers.indexOf(item)
     if(index !== -1) {
         addQuestionForm.answers.splice(index, 1)
     }
 }
 
-const addQuizQuestion = (el : FormInstance | undefined) => {
+const addQuizQuestion = (el : FormInstance | undefined): void => {
     if (!el) return
-    quizQuestions.push({question: addQuestionForm.question, answers: addQuestionForm.answers})
-    treeData[0].children?.push({label: `${t('Question')} ${treeData[0].children.length + 1}`})
-    addQuestionForm.answers = []
-    addQuestionForm.question = ''
+
+    el.validate((valid) => {
+        if(valid && validateAnswers()) {
+            quizQuestions.push({question: addQuestionForm.question, answers: addQuestionForm.answers})
+            treeData[0].children?.push({label: `${t('Question')} ${treeData[0].children.length + 1}`})
+            clearQuestionForm()
+        }
+    })
 }
 
+const validateAnswers = (): boolean => {
+    let correctAnswers = 0
+    let emptyFields = 0
+    addQuestionForm.answers.forEach(answer => {
+       
+        if(answer.answer.trim().length === 0) {
+           emptyFields++
+        }
+        if(answer.correctAnswer){
+            correctAnswers++
+        }
+    })
 
-const handleNodeClick = (data: ITree) => {
+    if(emptyFields > 0) {
+        notify.SetNofication(t('Error'), t('AnswersFieldsDontBeEmpty'), 'error')
+        return false
+    }
+    if (correctAnswers === 0){
+        notify.SetNofication(t('Error'), t('OneAnswerMustBeRigth'), 'error')
+        return false
+    }
+
+    return true
+} 
+
+
+const handleNodeClick = (data: ITree): void => {
     const index = treeData[0].children!.indexOf(data)
 
     if(index !== -1) {
@@ -88,29 +114,30 @@ const handleNodeClick = (data: ITree) => {
         addQuestionForm.answers = quizQuestions[index].answers
         isPreview.value = true
     } else {
-        addQuestionForm.answers = []
-        addQuestionForm.question = ''
-        isPreview.value = false
+        clearQuestionForm()
     }
    
 }
 
-const EditQuestionHandler = () => {
+const EditQuestionHandler = (): void => {
     if(currentQuestionIndex.value !== -1) {
         quizQuestions[currentQuestionIndex.value].question = addQuestionForm.question
         quizQuestions[currentQuestionIndex.value].answers = addQuestionForm.answers
-        notify.SetNofication('Succes', t('EditQuizQuestionSuccess'), 'success')
+        notify.SetNofication(t('Success'), t('EditQuizQuestionSuccess'), 'success')
     }
 }
 
-const DeleteQuestionHandler = () => {
+const DeleteQuestionHandler = (): void => {
     if(currentQuestionIndex.value !== -1) {
         quizQuestions.splice(currentQuestionIndex.value, 1)
         treeData[0].children!.pop()
-        addQuestionForm.answers = []
-        addQuestionForm.question = ''
-        isPreview.value = false
+        clearQuestionForm()
+        notify.SetNofication(t('Success'), t('DeleteQuizQuestionSuccess'), 'success')
     }
+}
+
+const publishQuizHandle = (): void => {
+    emit('publishQuiz', { ...quizQuestions })
 }
 
 </script>
@@ -129,7 +156,22 @@ const DeleteQuestionHandler = () => {
                 label-width="100px"
                 :model="addQuestionForm"
                 >
-                    <el-form-item :label="$t('InputQuizQuestion')" prop="quizName">
+                    <el-form-item 
+                    :label="$t('InputQuizQuestion')" 
+                    prop="question"
+                    :rules="[
+                        {
+                            required: true,
+                            message: $t('TheFieldMustNotBeEmpty'),
+                            trigger: 'blur',
+                        },
+                        {
+                            min: 10,
+                            message: $t('TheQuestionIsVeryShort'),
+                            trigger: ['blur', 'change'],
+                        },
+                     ]"
+                    >
                         <el-input type="textarea" v-model="addQuestionForm.question"/>
                     </el-form-item>
                     <el-form-item>
@@ -137,16 +179,17 @@ const DeleteQuestionHandler = () => {
                     </el-form-item>
                     <TransitionGroup name="list" tag="p">
                         <el-form-item
+                        v-for="(answer, index) in addQuestionForm.answers" :key="answer.key"
                         class="answer-item-form" 
                         :label="$t('AddQuizAnswer')" 
-                        prop="quizTheme"
-                        v-for="(answer, index) in addQuestionForm.answers" :key="answer.key">
+                        >
                             <div class="answer-item">
-                                <el-switch v-model="answer.correctAnswer" 
+                                <el-switch v-model="answer.correctAnswer"
+                                style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" 
                                 :active-text="$t('Correct')" 
-                                :inactive-text="$t('InCorrect')" />
-                                <el-input  v-model="answer.answer"/>
-                                <el-button type="danger" :icon="Delete" circle @click="removeAnswerItem(answer)"/>
+                                :inactive-text="$t('InCorrect')" validate-event="false"/>
+                                <el-input type="text" v-model="answer.answer" />
+                                <el-button type="danger" :icon="Delete" circle @click="removeAnswerItem(answer)" />
                             </div>
                         </el-form-item>
                     </TransitionGroup>
@@ -162,8 +205,8 @@ const DeleteQuestionHandler = () => {
                         </div>
                     </el-form-item>
                 </el-form>
-                <div class="publish-quiz" v-if="addQuestionForm.answers.length >= 2">
-                    <el-button type="success">{{$t('PublishQuiz')}}</el-button>
+                <div class="publish-quiz" v-if="quizQuestions.length >= 3">
+                    <el-button type="success" @click="publishQuizHandle">{{$t('PublishQuiz')}}</el-button>
                 </div>
         </template>
     </MainCard>

@@ -3,12 +3,12 @@ import { menuList } from './menulist'
 import MenuButtons from '@/components/UI/mainMenuButtons.vue'
 import logo from '@/assets/quizzaro.png' 
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
+// const handleOpen = (key: string, keyPath: string[]) => {
+//   console.log(key, keyPath)
+// }
+// const handleClose = (key: string, keyPath: string[]) => {
+//   console.log(key, keyPath)
+// }
 </script>
 
 
