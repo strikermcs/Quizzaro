@@ -1,4 +1,11 @@
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { 
+    collection, 
+    addDoc, 
+    query, 
+    doc, 
+    where, 
+    getDocs,
+    deleteDoc } from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { IQuizDb } from "@/interfaces/quiz.interfaces"; 
 
@@ -23,6 +30,12 @@ export default class quizService {
 
 
         return Quizzes
+    }
+
+    static async deleteQuizById(id: string): Promise<void> {
+        
+        const docRef = doc(db, "quizes", id);
+        await deleteDoc(docRef)
     }
 
 }

@@ -49,10 +49,15 @@
     "DeleteQuizQuestion": "Delete",
     "PublishQuiz": "Publish", 
     "Create": "Create",
+    "Warning": "Warning!",
+    "Cansel": "Cansel",
+    "Confirm": "Confirm",
     "MyQuizzesList": "My Quizzes",
     "MyQuizzesTableItemName": "Name:",
     "MyQuizzesTableItemTheme": "Theme:",
     "MyQuizzesTableSearchPlaceholder": "Type to search",
     "MainMenuCreateQuiz": "Create new Quiz",
-    "MainMenuMyQuizes": "My quizzes"  
+    "MainMenuMyQuizes": "My quizzes",
+    "QuestionDoYouReallyWantToDelete": "Do you really want to delete?",
+    "ItemDeleteSuccessfully": "Item delete successfully!"  
 }   

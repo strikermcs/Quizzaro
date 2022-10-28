@@ -49,10 +49,15 @@
     "DeleteQuizQuestion": "Видалити",
     "PublishQuiz": "Публікувати", 
     "Create": "Створити",
+    "Warning": "Попередження!",
+    "Cansel": "Відмінити",
+    "Confirm": "Підтвердити",
     "MyQuizzesList": "Мої квізи",
     "MyQuizzesTableItemName": "Назва квізу:",
     "MyQuizzesTableItemTheme": "Тема:",
     "MyQuizzesTableSearchPlaceholder": "Пошук...",
     "MainMenuCreateQuiz": "Створити новий квіз",
-    "MainMenuMyQuizes": "Мої квізи"    
+    "MainMenuMyQuizes": "Мої квізи",
+    "QuestionDoYouReallyWantToDelete": "Ви впевнені що хочете видалити це?",
+    "ItemDeleteSuccessfully": "Видалення успішно виконано!"       
 }   
