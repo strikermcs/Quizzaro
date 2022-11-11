@@ -59,5 +59,6 @@
     "MainMenuCreateQuiz": "Create new Quiz",
     "MainMenuMyQuizes": "My quizzes",
     "QuestionDoYouReallyWantToDelete": "Do you really want to delete?",
-    "ItemDeleteSuccessfully": "Item delete successfully!"  
+    "ItemDeleteSuccessfully": "Item delete successfully!",
+    "CorrectAnswersCount": "Number of correct answers:"  
 }   

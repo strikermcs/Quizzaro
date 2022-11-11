@@ -59,5 +59,6 @@
     "MainMenuCreateQuiz": "Створити новий квіз",
     "MainMenuMyQuizes": "Мої квізи",
     "QuestionDoYouReallyWantToDelete": "Ви впевнені що хочете видалити це?",
-    "ItemDeleteSuccessfully": "Видалення успішно виконано!"       
+    "ItemDeleteSuccessfully": "Видалення успішно виконано!",
+    "CorrectAnswersCount": "Кількість правильних відповідей:"         
 }   
