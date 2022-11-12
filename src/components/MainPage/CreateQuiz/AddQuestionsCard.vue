@@ -6,7 +6,7 @@ import { Delete } from '@element-plus/icons-vue'
 import { useI18n } from "vue-i18n";
 import { useNotificationStore } from '@/store/notification';
 import { IAnswer, IQuestion } from '@/interfaces/quiz.interfaces';
-import { validateAnswers } from '@/common/validations';
+import { validateAnswers } from '@/utils/validations';
 
 const { t } = useI18n()
 

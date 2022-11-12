@@ -1,8 +1,17 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { menuList } from './menulist'
 import MenuButtons from '@/components/UI/mainMenuButtons.vue'
-import logo from '@/assets/quizzaro.png' 
+import logo from '@/assets/quizzaro.png'
+import { useRouter } from 'vue-router' 
 
+const defaultActive = ref<String>("1")
+const router = useRouter();
+
+const headerClickHandler = () => {
+  defaultActive.value = "1"
+  router.push('/')
+}
 
 </script>
 
@@ -12,11 +21,11 @@ import logo from '@/assets/quizzaro.png'
         active-text-color="#ffd04b"
         background-color="#545c64"
         class="el-menu-vertical"
-        default-active="1"
+        :default-active="defaultActive"
         text-color="#fff"
         router
       >
-      <div class="menu-header">
+      <div class="menu-header" @click="headerClickHandler">
         <el-image :src="logo" style="width: 180px"/>
       </div>
         <el-menu-item v-for="item in menuList" :key="item.id" :index="item.id"
@@ -42,6 +51,7 @@ import logo from '@/assets/quizzaro.png'
     display: flex;
     justify-content: center;
     padding: 20px 0px 20px 0px;
+    cursor: pointer;
 }
 
 .button-items {

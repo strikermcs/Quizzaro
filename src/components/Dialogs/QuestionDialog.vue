@@ -15,7 +15,7 @@ const sendAnswer = (answer: boolean) => {
 
 
 <template>
-    <el-dialog v-model="visible" :title="$t(title)" width="30%" center :show-close="false">
+    <el-dialog :model-value="visible" :title="$t(title)" width="30%" center :show-close="false">
         <span>{{text}}</span>
         <template #footer>
             <span class="dialog-footer">

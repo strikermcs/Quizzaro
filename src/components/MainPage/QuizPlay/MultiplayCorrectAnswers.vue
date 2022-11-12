@@ -10,7 +10,8 @@ interface IProps {
 const props = defineProps<IProps>()
 const emit = defineEmits(['setAnswers'])
 const answerGroup = ref<Array<string>>()
-const answersCheck: IAnswer[] = []
+
+let answersCheck: IAnswer[] = []
 
 const correctAnswersCount = computed(() => {
     const correctAnswers = props.answers.filter(a => a.correctAnswer === true)
@@ -27,6 +28,7 @@ const setAnswersHandler = () => {
     })
 
     emit('setAnswers', answersCheck)
+    answersCheck = [] 
 }
 
 watch(answerGroup, (answers) => {

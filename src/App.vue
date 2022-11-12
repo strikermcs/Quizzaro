@@ -4,7 +4,7 @@
   import { onAuthStateChanged } from "firebase/auth";
   import { useUserStore } from './store/user'
   import { useNotificationStore } from './store/notification'
-  import ShowNotification from './common/notification'
+  import ShowNotification from './utils/notification'
   import { watch } from 'vue'
   import { useI18n } from "vue-i18n";
 

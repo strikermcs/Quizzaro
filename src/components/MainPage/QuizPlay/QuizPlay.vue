@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 import _ from 'lodash'
-import { IQuizDb, IAnswer } from '@/interfaces/quiz.interfaces';
+import { IQuizDb, IAnswer, IAnswersResult } from '@/interfaces/quiz.interfaces';
 import OneCorrectAnswer from './OneCorrectAnswer.vue'
 import MultiplayAnswer from './MultiplayCorrectAnswers.vue'
 import QuizResultBoard from './QuizResultBoard.vue'
+import { getResultTableData } from '@/utils/tableData'
+import { calculatePercentOfCorrectAnswers } from '@/utils/quiz'
 
 interface Props {
     quiz: IQuizDb
-}
-
-interface IAnswersResult {
-    answers: IAnswer[]
-    correctPercent: number
 }
 
 const props = defineProps<Props>()
@@ -35,7 +32,12 @@ const questionAnswers = computed(() => {
 
 const answerClickHandler = (answers: IAnswer[]) => {
     const { questions } = props.quiz
-    AnswersResult.push({answers, correctPercent: calculatePercentOfCorrectAnswers(answers)})
+    AnswersResult.push(
+        {
+            answers, 
+            correctPercent: calculatePercentOfCorrectAnswers(answers, props.quiz, currentQuestion.value)
+        }
+    )
     
     if(currentQuestion.value !== _.size(questions) - 1) {
         currentQuestion.value++
@@ -46,13 +48,6 @@ const answerClickHandler = (answers: IAnswer[]) => {
 }
 
 
-const calculatePercentOfCorrectAnswers = (answers: IAnswer[]): number => {
-   const userCorrectAnswers = answers.filter(a => a.correctAnswer === true).length
-   const correctAnswers = props.quiz.questions[currentQuestion.value]
-        .answers.filter(a => a.correctAnswer === true).length
-    if (userCorrectAnswers === 0) return 0
-    return userCorrectAnswers / correctAnswers
-}
 
 </script>
 
@@ -65,7 +60,7 @@ const calculatePercentOfCorrectAnswers = (answers: IAnswer[]): number => {
         <div class="quiz-question">
             <em>{{question.question}}</em>
         </div>
-           
+
                 <OneCorrectAnswer 
                 v-if="!questionAnswers.multiplayAnswers" 
                 :answers="questionAnswers.answers"
@@ -83,7 +78,7 @@ const calculatePercentOfCorrectAnswers = (answers: IAnswer[]): number => {
             </el-steps>
         </div>
     </div>
-    <QuizResultBoard v-else :results="AnswersResult"/>
+    <QuizResultBoard v-else :results="getResultTableData(AnswersResult, quiz)"/>
 </template>
 
 <style scoped>

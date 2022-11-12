@@ -60,5 +60,11 @@
     "MainMenuMyQuizes": "Мої квізи",
     "QuestionDoYouReallyWantToDelete": "Ви впевнені що хочете видалити це?",
     "ItemDeleteSuccessfully": "Видалення успішно виконано!",
-    "CorrectAnswersCount": "Кількість правильних відповідей:"         
+    "CorrectAnswersCount": "Кількість правильних відповідей:",
+    "QuizResultDashboardHeader": "Результат квізу",
+    "ResultTableQuestionColumn": "Питання:",
+    "ResultTableRigthAnswersColumn": "Правильна відповідь:",
+    "ResultTableUserAnswersColumn": "Ваша відповідь:",
+    "ResultTableResultColumn": "Результат:",
+    "QuizCommonResult": "Загальний результат:"          
 }   

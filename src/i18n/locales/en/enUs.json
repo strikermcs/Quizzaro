@@ -60,5 +60,11 @@
     "MainMenuMyQuizes": "My quizzes",
     "QuestionDoYouReallyWantToDelete": "Do you really want to delete?",
     "ItemDeleteSuccessfully": "Item delete successfully!",
-    "CorrectAnswersCount": "Number of correct answers:"  
+    "CorrectAnswersCount": "Number of correct answers:",
+    "QuizResultDashboardHeader": "Quiz result:",
+    "ResultTableQuestionColumn": "Question:",
+    "ResultTableRigthAnswersColumn": "Right answers:",
+    "ResultTableUserAnswersColumn": "Your answers:",
+    "ResultTableResultColumn": "Result:",
+    "QuizCommonResult": "Overall result:" 
 }   
