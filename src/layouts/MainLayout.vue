@@ -4,10 +4,15 @@
   import { onAuthStateChanged } from "firebase/auth";
   import { useUserStore } from '../store/user'
   import { useRouter } from 'vue-router'
-  import { onMounted } from 'vue'
+  import { onMounted, ref } from 'vue'
  
   const router = useRouter()
   const userStore = useUserStore()
+  const isAsideOpen = ref(true)
+
+  const menuToggleHandler = (toggle: boolean) => {
+    isAsideOpen.value = toggle
+  }
 
   onAuthStateChanged(auth, (user) => {
 
@@ -30,28 +35,59 @@
 
 
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-aside class="aside-menu">
-        <MainMenu />
-      </el-aside>
-      <el-main >
-        <RouterView />
-      </el-main>
-    </el-container>
-  </div>
+  <aside class="aside-menu" :class="{ 'aside-close': !isAsideOpen }">
+    <MainMenu :menuOpen="isAsideOpen" @toggleMenu="menuToggleHandler"/>
+  </aside>
+  <main class="page" :class="{ 'page-full' : !isAsideOpen }">
+    <div class="page-container">
+      <RouterView />
+    </div>
+  </main>
 </template>
 
 <style scoped>
 .aside-menu {
-  width: 200px;
-  transition: all 0.5s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  height: 100%;
+  z-index: 999;
+  background: #0e101e;
+  overflow: hidden;
+  transition: ease-in-out 0.4s 0s;
 }
 
-@media screen and (max-width: 1000px) {
-  .aside-menu {
-    position: absolute;
-    left: -200px;
-  }
+.page {
+  margin: 0 0 0 260px; 
+  transition: ease-in-out 0.4s;
 }
+
+.page-container {
+  width: 1000px;
+  margin: 0 auto;
+  padding-top: 60px; 
+  /* padding: 0px 5px 0px 5px;  */
+}
+
+.aside-close {
+  left: -260px;
+}
+
+.page-full {
+  margin: 0;
+}
+
+@media screen and (max-width: 1320px) {
+  .page {
+    margin: 0;
+  }
+
+  .page-container {
+    width: 90%;
+  }
+
+}
+
 </style>

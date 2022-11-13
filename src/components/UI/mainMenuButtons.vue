@@ -19,7 +19,7 @@ import LogOut from './LogOutButton.vue'
         justify-content: space-between;
         align-items: center;
         padding: 0px 15px 0px 15px;
-        color: white;
+        color: #7981b5;
         min-width: 160px;
     }
 </style>
