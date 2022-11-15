@@ -6,6 +6,7 @@ import { IQuizDb } from '@/interfaces/quiz.interfaces'
 import { VideoPlay, Delete, Edit, Promotion } from '@element-plus/icons-vue'
 import QuestionDialog from '@/components/Dialogs/QuestionDialog.vue'
 import { useNotificationStore } from '@/store/notification'
+import SendQuizDialog from '@/components/Dialogs/SendQuiz/SendQuizDialog.vue'
 
 
 interface ICommand {
@@ -54,7 +55,7 @@ const handleTest = async (index: number, row: IQuizDb) => {
 }
 
 const handleSend = async (index: number, row: IQuizDb) => { 
-  emit('sendCommand', {command: 'SendQuiz', data: row})
+  
 }
 
  const dialogAnswer = async (answer: boolean) => {
@@ -87,7 +88,13 @@ const handleSend = async (index: number, row: IQuizDb) => {
       </template>
     </el-table-column>
   </el-table>
-  <QuestionDialog :visible="dialogVisible" :text="$t('QuestionDoYouReallyWantToDelete')" @sendAnswer="dialogAnswer"/>
+  <QuestionDialog 
+    :visible="dialogVisible" 
+    :text="$t('QuestionDoYouReallyWantToDelete')" 
+    @sendAnswer="dialogAnswer"
+  />
+  <SendQuizDialog />
+
 </template>
 
 

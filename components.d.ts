@@ -59,6 +59,7 @@ declare module '@vue/runtime-core' {
     QuizResultBoard: typeof import('./src/components/MainPage/QuizPlay/QuizResultBoard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SendQuizDialog: typeof import('./src/components/Dialogs/SendQuiz/SendQuizDialog.vue')['default']
     StepStaus: typeof import('./src/components/MainPage/QuizPlay/StepStaus.vue')['default']
     TheOneCorrentAnswer: typeof import('./src/components/MainPage/QuizPlay/TheOneCorrentAnswer.vue')['default']
     ToggleThemeButton: typeof import('./src/components/UI/ToggleThemeButton.vue')['default']

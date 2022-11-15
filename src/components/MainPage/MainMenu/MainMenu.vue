@@ -1,14 +1,21 @@
 <script lang="ts" setup>
-import { watch, ref } from 'vue'
+import { watch, ref, computed } from 'vue'
 import { menuList } from './menulist'
 import MenuButtons from '@/components/UI/mainMenuButtons.vue'
 import logo from '@/assets/quizzaro.png'
 import Burger from '@/components/UI/burger.vue'
+import { useRoute }  from 'vue-router'
+
 
 const props = defineProps(['menuOpen']) 
 const emit = defineEmits(['toggleMenu'])
+const route = useRoute()
 const closeButton = ref(false)
 const menuState = ref(true)
+
+const getCurrentRouteName = computed(() => {
+  return route.name 
+}) 
 
 const burgerClickHandler = (toggle: boolean) => {
   menuState.value = toggle
@@ -41,6 +48,7 @@ watch(menuState, (count) => {
             <ul class="main-menu">
               <li class="main-menu-item"
               v-for="item in menuList" :key="item.id"
+              :class="{'active-menu-item': getCurrentRouteName === item.route.name}"
               >
                 <router-link :to="item.route" class="main-menu-link">
                   <el-icon class="menu-icon"><component :is="item.icon"/></el-icon>
@@ -133,6 +141,9 @@ watch(menuState, (count) => {
   height: 55px;
 }
 
+.active-menu-item {
+  background: #2a2c3d;
+}
 .main-menu-item:hover {
   background: #1A1D37;
 }

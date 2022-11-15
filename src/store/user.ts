@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { User } from "firebase/auth";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../firebase/firebase'
+import UsersService from '@/services/users.service';
 import { useNotificationStore } from './notification'
 
 interface IUserStoreState {
@@ -30,13 +31,29 @@ export const useUserStore = defineStore('user', {
                 });
         },
  
-        register(email: string, password: string): void {
+        async register(username: string, email: string, password: string): Promise<void>{
             const notify = useNotificationStore()
+            const user = await UsersService.getUserByUsername(username)
+            
+            if(user){
+                notify.SetNofication('Error', 'UsernameAlreadyExists', 'error')
+                return
+            }
+
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {                     
                     this.user = userCredential.user;
-                    notify.SetNofication('Success', 'UserSuccessfullyCreated', 'success')
-                
+                    updateProfile(auth.currentUser!, {
+                        displayName: username
+                      }).then(() => {
+                        UsersService.createUser({
+                            userId: userCredential.user.uid,
+                            username,
+                            email
+                        }).then((id) => {
+                            notify.SetNofication('Success', 'UserSuccessfullyCreated', 'success')
+                        })      
+                      })                           
             })
             .catch((error) => {
                 const errorCode = error.code;

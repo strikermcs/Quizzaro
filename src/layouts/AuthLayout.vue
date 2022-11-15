@@ -21,8 +21,8 @@ import LocaleSelect from '../components/UI/LocaleSelect.vue'
 .authpage {
     height: 100vh;
     width: 100%;
-    background-color: #4e73df;
-    background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
+    background-color: #101121;
+    background-image: linear-gradient(180deg,#101121 10%,#0b1329 100%);
     background-size: cover;
     display: flex;
     flex-direction: column;

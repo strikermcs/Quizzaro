@@ -13,6 +13,7 @@ import { useI18n } from "vue-i18n";
     const registerFormRef = ref<FormInstance>() 
 
     const registerForm = reactive({
+        username: '',
         email: '',
         password: '',
         rePassword: ''
@@ -30,6 +31,13 @@ import { useI18n } from "vue-i18n";
     }
 
     const rules = reactive<FormRules>({
+        username: [
+            {
+                type: 'string',
+                required: true,
+                message: t('username-required')
+            }
+        ],
         email: [
             {
                 type: 'email', 
@@ -73,7 +81,7 @@ import { useI18n } from "vue-i18n";
         if(!formEl) return
         await formEl.validate((valid,fields) => {
             if(valid) {
-                userStore.register(registerForm.email, registerForm.password)
+                userStore.register(registerForm.username, registerForm.email, registerForm.password)
             }
         })
         
@@ -102,6 +110,13 @@ import { useI18n } from "vue-i18n";
                 :rules="rules"
                 style="min-width: 300px"
                 >
+                    <el-form-item :label="$t('RegisterCardUsernameFieldLabel')" prop="username">
+                        <el-input 
+                        type="text"
+                        :placeholder="$t('RegisterCardUsernameFieldPlaceholder')"
+                        v-model="registerForm.username"
+                        />
+                    </el-form-item>
                     <el-form-item :label="$t('RegisterCardEmailFieldLabel')" prop="email">
                         <el-input 
                         type="email"

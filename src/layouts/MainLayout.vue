@@ -40,7 +40,11 @@
   </aside>
   <main class="page" :class="{ 'page-full' : !isAsideOpen }">
     <div class="page-container">
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </main>
 </template>
@@ -77,6 +81,16 @@
 
 .page-full {
   margin: 0;
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 @media screen and (max-width: 1320px) {
