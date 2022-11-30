@@ -31,4 +31,17 @@ export default class UsersService {
 
         return user
     }
+
+    static async getAllUsers(): Promise<IUser[] | undefined> {
+        const Users: IUser[] = []
+        const q = query(collection(db, "users"))
+        const result = await getDocs(q)
+
+        result.forEach(doc => {
+           const user: IUser = doc.data() as IUser
+           Users.push(user)
+        })
+        
+       return Users
+    }
 } 

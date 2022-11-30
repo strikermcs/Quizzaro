@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import MyQuizzesList from '@/components/MainPage/MyQuizzesList/MyQuizzesList.vue'
 import { IQuizDb } from '@/interfaces/quiz.interfaces'
 import TestQuiz from '@/components/MainPage/QuizPlay/QuizPlay.vue'
+import SendQuiz from '@/components/MainPage/SendQuiz/SendQuiz.vue'
 
 interface ICommand {
   command: string,
@@ -10,7 +11,8 @@ interface ICommand {
 }
 
 const commandComponents: any = {
-    TestQuiz
+    TestQuiz,
+    SendQuiz
 }
 
 const CommandActive = ref<ICommand | null>(null)
