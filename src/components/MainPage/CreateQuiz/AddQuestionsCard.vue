@@ -163,7 +163,7 @@ const publishQuizHandle = (): void => {
                                 <el-switch v-model="answer.correctAnswer"
                                 style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" 
                                 :active-text="$t('Correct')" 
-                                :inactive-text="$t('InCorrect')" validate-event="false"/>
+                                :inactive-text="$t('InCorrect')" :validate-event="false"/>
                                 <el-input type="text" v-model="answer.answer" />
                                 <el-button type="danger" :icon="Delete" circle @click="removeAnswerItem(answer)" />
                             </div>

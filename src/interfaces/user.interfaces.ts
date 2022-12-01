@@ -4,3 +4,7 @@ export interface IUser {
     username: string,
     email: string
 }
+
+export interface IUserItem extends IUser {
+    list?: number
+}

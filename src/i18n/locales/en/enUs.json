@@ -70,5 +70,8 @@
     "ResultTableRigthAnswersColumn": "Right answers:",
     "ResultTableUserAnswersColumn": "Your answers:",
     "ResultTableResultColumn": "Result:",
-    "QuizCommonResult": "Overall result:" 
+    "QuizCommonResult": "Overall result:",
+    "SendQuizHeader": "Send Quiz",
+    "SendQuizSelectUsers": "Select Users",
+    "SendQuizToUsersButton": "Send" 
 }   

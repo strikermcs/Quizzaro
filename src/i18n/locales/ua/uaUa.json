@@ -70,5 +70,8 @@
     "ResultTableRigthAnswersColumn": "Правильна відповідь:",
     "ResultTableUserAnswersColumn": "Ваша відповідь:",
     "ResultTableResultColumn": "Результат:",
-    "QuizCommonResult": "Загальний результат:"          
+    "QuizCommonResult": "Загальний результат:",
+    "SendQuizHeader": "Надіслати Квіз",
+    "SendQuizSelectUsers": "Виберіть кому",
+    "SendQuizToUsersButton": "Відправити"           
 }   

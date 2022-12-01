@@ -1,17 +1,26 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { Search } from '@element-plus/icons-vue';
+import { Search, UserFilled } from '@element-plus/icons-vue';
+import { IUserItem } from '@/interfaces/user.interfaces';
+import { UserItemsToUsers } from '@/utils/quiz';
 
-const props = defineProps(['items'])
-const searchItem = ref<String>('')
-const listItems = ref<any[]>([]) 
+const props = defineProps<{users: IUserItem[]}>()
+const emit = defineEmits(['usersChoosen'])
+const searchItem = ref<string>('')
+const listItems = ref<IUserItem[]>([]) 
 
 const listOne = computed(() => {
+    if(searchItem.value.trim() != ''){
+        return listItems.value.filter(item => item.username.toLowerCase().includes(searchItem.value.toLowerCase()) &&
+        item.list == 1) 
+    }
     return listItems.value.filter(item => item.list === 1)
 })
 
 const listTwo = computed(() => {
-    return listItems.value.filter(item => item.list === 2)
+    let list = listItems.value.filter(item => item.list === 2)
+    emit('usersChoosen',  UserItemsToUsers(list))
+    return list
 })
 
 const startDrag = (evt: DragEvent, item: any) => {
@@ -35,9 +44,10 @@ const userClickHandle = (item: any) => {
 }
 
 
-watch(() => props.items, (count) => {
+watch(() => props.users, (count) => {
     listItems.value = count
 })
+
 
 </script>
 
@@ -55,13 +65,16 @@ watch(() => props.items, (count) => {
             </div>
             <div class="items-add-list">
                 <ul class="items-list">
-                    <li class="item" 
+                    <li 
                     v-for="item in listOne" 
                     :key="item.username"
                     draggable="true"
                     @dragstart="startDrag($event, item)"
                     >
-                        <el-checkbox :label="item.username" size="large" @click.prevent="userClickHandle(item)"/>      
+                        <div @click.prevent="userClickHandle(item)" class="item">
+                            <span>{{item.username}}</span>
+                            <el-icon><UserFilled /></el-icon>  
+                        </div> 
                     </li>
                 </ul>
             </div>      
@@ -143,4 +156,12 @@ li {
 .item-check span:hover {
     border: 1px solid red; 
 } 
+
+.item {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 5px 0px 5px 0px;
+    cursor: pointer; 
+}
 </style>
