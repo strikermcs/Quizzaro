@@ -7,8 +7,9 @@ import {
     getDocs,
     deleteDoc } from "firebase/firestore";
 import { db } from '../firebase/firebase'
-import { IQuizDb } from "@/interfaces/quiz.interfaces"; 
-
+import { IQuizDb, ISendQuiz } from "@/interfaces/quiz.interfaces"; 
+import { IUser } from "@/interfaces/user.interfaces";
+import { useUserStore } from "@/store/user";
 
 export default class quizService {
 
@@ -36,6 +37,20 @@ export default class quizService {
         
         const docRef = doc(db, "quizes", id);
         await deleteDoc(docRef)
+    }
+
+    static async sendQuizToUser(recipient: IUser, quiz: IQuizDb): Promise<string> {
+        const user = useUserStore()
+
+        const toSend: ISendQuiz = {
+            quizId: quiz.id as string,
+            senderId: user.user?.uid as string,
+            recipientId: recipient.userId as string
+        }
+
+        const docRef = await addDoc(collection(db, "sendQuizes"), toSend)
+
+        return docRef.id
     }
 
 }

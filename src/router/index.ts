@@ -16,6 +16,24 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/my_quizes',
                 name: 'my-quizes',
                 component: () => import('../views/MainLayout/MyQuizes.vue')
+            },
+            
+            {
+                path: '/sent',
+                name: 'sent',
+                component: () => import('../views/MainLayout/SentQuizes.vue')
+            },
+
+            {
+                path: '/income',
+                name: 'income',
+                component: () => import('../views/MainLayout/IncomeQuizes.vue')
+            },
+
+            {
+                path: '/all',
+                name: 'all',
+                component: () => import('../views/MainLayout/AllQuizes.vue')
             }
         ]
     },

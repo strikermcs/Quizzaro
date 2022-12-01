@@ -31,3 +31,10 @@ export interface IResultDataTableItem {
     userAnswers: string
     result: number
 }
+
+export interface ISendQuiz {
+    id?: string
+    quizId: string
+    senderId: string
+    recipientId: string 
+}

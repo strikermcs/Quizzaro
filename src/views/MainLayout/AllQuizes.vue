@@ -1,0 +1,1 @@
+<template>All Quizes</template>

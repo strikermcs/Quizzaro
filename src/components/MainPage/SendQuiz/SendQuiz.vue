@@ -3,18 +3,39 @@ import { ref, onMounted } from 'vue'
 import FindAndChooseUsers from '@/components/MainPage/SendQuiz/FindUsers/FindAndChoose.vue'
 import FindAndChooseUserMobile from '@/components/MainPage/SendQuiz/FindUsers/FindAndChooseMobile.vue';
 import UsersService from '@/services/users.service';
+import quizService from '@/services/quiz.service';
 import { IUser } from '@/interfaces/user.interfaces';
 import { getItems } from '@/utils/quiz';
+import { useNotificationStore } from '@/store/notification';
 
 const props = defineProps(['quiz']) 
 const loading = ref(true)
+const notify = useNotificationStore()
+
+let usersChoose:IUser[] = []
 
 let users: IUser[] | undefined
-let usersChoose: IUser[]
+
 
 const updateUsers = (users: IUser[]) => {
     usersChoose = users
-    console.log(usersChoose)
+}
+
+const sendQuizHandler =  async () => {
+
+    if(usersChoose.length > 0){
+        loading.value = true
+        console.log(usersChoose.length)
+        for await (const user of usersChoose){
+            await quizService.sendQuizToUser(user, props.quiz)        
+        }
+        loading.value = false
+        notify.SetNofication('Success', 'SendQuizToUsersSuccess', 'success')
+
+        return
+    }
+
+    notify.SetNofication('Error', 'SendQuizErrorUsers', 'error')
 }
 
 onMounted( async() => {
@@ -45,7 +66,11 @@ onMounted( async() => {
                 </div>         
             </div>
             <div class="column send-button">
-                <el-button type="primary">{{$t('SendQuizToUsersButton')}}</el-button>
+                <el-button type="primary" 
+                @click="sendQuizHandler" 
+                >
+                    {{$t('SendQuizToUsersButton')}}
+                </el-button>
             </div>
         </div> 
 </template>

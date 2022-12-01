@@ -164,6 +164,10 @@ watch(menuState, (count) => {
   transition: 0.4s;
 }
 
+.main-menu-link span {
+  overflow-wrap: anywhere;
+}
+
 .menu-icon {
   margin-right: 10px;
 }
