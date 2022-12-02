@@ -23,8 +23,8 @@ const getOverallResult = computed(() => {
 <template>
   <div class="header-result"><h3>{{$t('QuizResultDashboardHeader')}}</h3></div>
    <el-table :data="results" style="width: 100%">
-    <el-table-column prop="question" :label="$t('ResultTableQuestionColumn')" width="180" />
-    <el-table-column prop="rigthAnswers" :label="$t('ResultTableRigthAnswersColumn')" width="180" />
+    <el-table-column prop="question" :label="$t('ResultTableQuestionColumn')"  />
+    <el-table-column prop="rigthAnswers" :label="$t('ResultTableRigthAnswersColumn')"  />
     <el-table-column prop="userAnswers" :label="$t('ResultTableUserAnswersColumn')" />
     <el-table-column align="right">
       <template #header>

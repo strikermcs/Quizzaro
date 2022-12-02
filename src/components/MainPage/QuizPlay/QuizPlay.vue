@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import _ from 'lodash'
 import { IQuizDb, IAnswer, IAnswersResult } from '@/interfaces/quiz.interfaces';
 import OneCorrectAnswer from './OneCorrectAnswer.vue'
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits(['quizeFinish'])
 
 const currentQuestion = ref<number>(0)
 const quizFinish = ref(false)
@@ -47,7 +48,11 @@ const answerClickHandler = (answers: IAnswer[]) => {
     quizFinish.value = true
 }
 
-
+watch(() => quizFinish.value, count => {
+    if(count){
+        emit('quizeFinish', getResultTableData(AnswersResult, props.quiz))
+    }
+})
 
 </script>
 

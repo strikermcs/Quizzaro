@@ -61,6 +61,8 @@ declare module '@vue/runtime-core' {
     OneCorrentAnswer: typeof import('./src/components/MainPage/QuizPlay/OneCorrentAnswer.vue')['default']
     QuestionDialog: typeof import('./src/components/Dialogs/QuestionDialog.vue')['default']
     QuizesList: typeof import('./src/components/MainPage/QuizesList/QuizesList.vue')['default']
+    QuizesListAll: typeof import('./src/components/MainPage/QuizesList/QuizesListAll.vue')['default']
+    QuizesListIncome: typeof import('./src/components/MainPage/QuizesList/QuizesListIncome.vue')['default']
     QuizPlay: typeof import('./src/components/MainPage/QuizPlay/QuizPlay.vue')['default']
     QuizResultBoard: typeof import('./src/components/MainPage/QuizPlay/QuizResultBoard.vue')['default']
     RefreshButton: typeof import('./src/components/UI/RefreshButton.vue')['default']

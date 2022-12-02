@@ -10,7 +10,7 @@ import { RefreshLeft } from '@element-plus/icons-vue';
 
 <style scoped>
 .refresh {
-    position: absolute;
+    position: fixed;
     right: 20px;
     bottom: 20px;
     opacity: 0.3;

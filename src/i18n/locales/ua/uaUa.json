@@ -82,6 +82,9 @@
     "SentQuizzesList": "Відправлені",
     "SentQuizesListQuizName": "Назва:",
     "SentQuizesListRecipient": "Кому:",
+    "SentQuizesListSender": "Від кого:",
     "SentQuizesPlay": "Пройти",
-    "SentQuizesDelete": "Видалити"            
+    "SentQuizesDelete": "Видалити",
+    "AnswersQuizSendToUser": "Відповіді доставлені користовачу",
+    "AllQuizes": "Всі квізи"             
 }   

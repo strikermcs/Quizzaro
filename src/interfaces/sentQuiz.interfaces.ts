@@ -6,3 +6,10 @@ export interface ISendQuizTable {
     recipientId: string
     sentQuizId: string
 }
+
+export interface IIncomeQuizTable {
+    quiz: IQuizDb,
+    senderName: string,
+    senderId: string,
+    sentQuizId: string
+}

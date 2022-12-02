@@ -36,6 +36,13 @@ export interface ISendQuiz {
     id?: string
     quizId: string
     senderId: string
+    senderName: string
     recipientId: string
     recipientName: string 
+}
+
+export interface IResultUserDataTable {
+    quizRezult: IResultDataTableItem[]
+    username: string
+    userId: string
 }

@@ -71,7 +71,8 @@
 .page-container {
   width: 1000px;
   margin: 0 auto;
-  padding-top: 60px; 
+  padding-top: 60px;
+  padding-bottom: 40px; 
   /* padding: 0px 5px 0px 5px;  */
 }
 

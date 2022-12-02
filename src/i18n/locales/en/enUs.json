@@ -82,6 +82,9 @@
     "SentQuizzesList": "Sent Quizes",
     "SentQuizesListQuizName": "Quiz Name",
     "SentQuizesListRecipient": "Recipient",
+    "SentQuizesListSender": "Sender",
     "SentQuizesPlay": "Play",
-    "SentQuizesDelete": "Delete" 
+    "SentQuizesDelete": "Delete",
+    "AnswersQuizSendToUser": "Responses sent to user",
+    "AllQuizes": "All Quizes" 
 }   
