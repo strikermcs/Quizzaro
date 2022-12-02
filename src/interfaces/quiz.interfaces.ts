@@ -36,5 +36,6 @@ export interface ISendQuiz {
     id?: string
     quizId: string
     senderId: string
-    recipientId: string 
+    recipientId: string
+    recipientName: string 
 }

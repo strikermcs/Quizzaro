@@ -57,7 +57,7 @@
   bottom: 0;
   width: 260px;
   height: 100%;
-  z-index: 999;
+  z-index: 9999999;
   background: #0e101e;
   overflow: hidden;
   transition: ease-in-out 0.4s 0s;

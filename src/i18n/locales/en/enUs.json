@@ -76,5 +76,12 @@
     "QuizCommonResult": "Overall result:",
     "SendQuizHeader": "Send Quiz",
     "SendQuizSelectUsers": "Select Users",
-    "SendQuizToUsersButton": "Send" 
+    "SendQuizToUsersSuccess": "Quiz Sent",
+    "SendQuizErrorUsers": "First, choose who to send it to",
+    "SendQuizToUsersButton": "Send",
+    "SentQuizzesList": "Sent Quizes",
+    "SentQuizesListQuizName": "Quiz Name",
+    "SentQuizesListRecipient": "Recipient",
+    "SentQuizesPlay": "Play",
+    "SentQuizesDelete": "Delete" 
 }   

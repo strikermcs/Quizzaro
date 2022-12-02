@@ -76,5 +76,12 @@
     "QuizCommonResult": "Загальний результат:",
     "SendQuizHeader": "Надіслати Квіз",
     "SendQuizSelectUsers": "Виберіть кому",
-    "SendQuizToUsersButton": "Відправити"           
+    "SendQuizToUsersButton": "Відправити",
+    "SendQuizToUsersSuccess": "Квіз успішно відправлений",
+    "SendQuizErrorUsers": "Спочатку виберіть кому відправити",
+    "SentQuizzesList": "Відправлені",
+    "SentQuizesListQuizName": "Назва:",
+    "SentQuizesListRecipient": "Кому:",
+    "SentQuizesPlay": "Пройти",
+    "SentQuizesDelete": "Видалити"            
 }   

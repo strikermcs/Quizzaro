@@ -30,7 +30,7 @@ const commandHandler = (command: ICommand) => {
             </template>
            <MyQuizzesList @sendCommand="commandHandler" v-if="!CommandActive"/>
            <component :is="commandComponents[CommandActive.command]" v-else :quiz="CommandActive.data"/>
-        </el-card>
+    </el-card>
  
 </template>
 
