@@ -30,7 +30,8 @@ const quizeFinishHandle = async(resultQuiz: IResultDataTableItem[]) => {
   const rezult: IResultUserDataTable = {
     quizRezult: resultQuiz,
     username: userStore.user?.displayName as string,
-    userId: props.data[currentQuiz.value].senderId
+    userId: props.data[currentQuiz.value].senderId,
+    isRead: false
   } 
   await quizService.sentResultQuizToUser(rezult)
   isLoading.value = false

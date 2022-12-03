@@ -5,6 +5,7 @@
   import { useUserStore } from '../store/user'
   import { useRouter } from 'vue-router'
   import { onMounted, ref } from 'vue'
+  import Mail from '@/components/MainPage/Mail/Mail.vue';
  
   const router = useRouter()
   const userStore = useUserStore()
@@ -35,21 +36,27 @@
 
 
 <template>
-  <aside class="aside-menu" :class="{ 'aside-close': !isAsideOpen }">
-    <MainMenu :menuOpen="isAsideOpen" @toggleMenu="menuToggleHandler"/>
-  </aside>
-  <main class="page" :class="{ 'page-full' : !isAsideOpen }">
-    <div class="page-container">
-      <router-view v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
-          <component :is="Component" />
-        </transition>
-      </router-view>
-    </div>
-  </main>
+  <div class="main">
+    <Mail v-if="userStore.user"/>
+    <aside class="aside-menu" :class="{ 'aside-close': !isAsideOpen }">
+      <MainMenu :menuOpen="isAsideOpen" @toggleMenu="menuToggleHandler"/>
+    </aside>
+    <main class="page" :class="{ 'page-full' : !isAsideOpen }">
+      <div class="page-container">
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </div>
+    </main>
+  </div>
 </template>
 
 <style scoped>
+.main {
+  position: relative;
+}
 .aside-menu {
   position: fixed;
   top: 0;
@@ -57,7 +64,7 @@
   bottom: 0;
   width: 260px;
   height: 100%;
-  z-index: 9999999;
+  z-index: 2000;
   background: #0e101e;
   overflow: hidden;
   transition: ease-in-out 0.4s 0s;

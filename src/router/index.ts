@@ -34,6 +34,12 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/all',
                 name: 'all',
                 component: () => import('../views/MainLayout/AllQuizes.vue')
+            },
+
+            {
+                path: '/mail',
+                name: 'mail',
+                component: () => import('../views/MainLayout/MailPage.vue')
             }
         ]
     },

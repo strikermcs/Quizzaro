@@ -45,4 +45,5 @@ export interface IResultUserDataTable {
     quizRezult: IResultDataTableItem[]
     username: string
     userId: string
+    isRead: boolean
 }

@@ -5,7 +5,8 @@ import {
     doc, 
     where, 
     getDocs,
-    deleteDoc, 
+    deleteDoc,
+    onSnapshot, 
     getDoc} from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { IQuizDb, ISendQuiz, IResultUserDataTable } from "@/interfaces/quiz.interfaces"; 
@@ -117,7 +118,7 @@ export default class quizService {
             quizesList.push({
                 quiz: result.data() as IQuizDb,
                 senderName: sent.senderName,
-                senderId: sent.recipientId,
+                senderId: sent.senderId,
                 sentQuizId: sent.id as string
             })
 
@@ -144,5 +145,7 @@ export default class quizService {
 
         return docRef.id
     }
+
+  
 
 }
