@@ -2,14 +2,16 @@
 import { ref } from 'vue'
 import { IResultUserDataTable, IResultDataTableItem } from '@/interfaces/quiz.interfaces';
 import QuizResultBoard from '../QuizPlay/QuizResultBoard.vue';
+import { setMailIsRead } from '@/services/mail.service';
 
 const props = defineProps<{data: IResultUserDataTable[]}>()
 const isResultBoard = ref(false)
 const resultsBoard = ref<IResultDataTableItem[]>([])
 
-const handleOpen = (index: number, row: number) => {
+const handleOpen = async(index: number, row: number) => {
     resultsBoard.value = props.data[index].quizRezult
     isResultBoard.value = true
+    await setMailIsRead(props.data[index].id)
 }
 
 const refreshHandle = () => {

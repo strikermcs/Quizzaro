@@ -67,6 +67,12 @@ const routes: Array<RouteRecordRaw> = [
         path: '/welcome',
         name: 'Welcome',
         component: () => import('../views/Welcome.vue') 
+    },
+
+    {
+        path: '/my_quizes/urlpath/:id',
+        name: 'quiz-url',
+        component: () => import('../views/QuizFromUrl.vue') 
     }
 
 ]

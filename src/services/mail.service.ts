@@ -1,5 +1,5 @@
 import { db } from '../firebase/firebase'
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { collection, query, where, onSnapshot, updateDoc, doc } from "firebase/firestore";
 import { useUserStore } from '@/store/user';
 import { IResultUserDataTable } from "@/interfaces/quiz.interfaces"; 
 
@@ -10,10 +10,17 @@ export function subscribeToMail(update: Function) {
     const results:IResultUserDataTable[] = []
         
         querySnapshot.forEach((doc) => {
-            results.push(doc.data() as IResultUserDataTable);
+            results.push({id: doc.id, ...doc.data()} as IResultUserDataTable);
         });
           update(results)
     });
 
+}
+
+export async function setMailIsRead(id: string): Promise<void> {
+    const docRef = doc(db, "quizesResults", id)
+    const data = { isRead: true }
+
+    await updateDoc(docRef, data)
 }
 

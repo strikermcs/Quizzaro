@@ -86,5 +86,9 @@
     "SentQuizesPlay": "Play",
     "SentQuizesDelete": "Delete",
     "AnswersQuizSendToUser": "Responses sent to user",
-    "AllQuizes": "All Quizes" 
+    "AllQuizes": "All Quizes",
+    "UserMail": "Mail",
+    "MailQuizUsername": "Passed quizzes:",
+    "MailOpen": "Look",
+    "QuizUrlIsCopyToClipboard": "Link copied to clipboard" 
 }   

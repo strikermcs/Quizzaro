@@ -9,7 +9,7 @@ import {
     onSnapshot, 
     getDoc} from "firebase/firestore";
 import { db } from '../firebase/firebase'
-import { IQuizDb, ISendQuiz, IResultUserDataTable } from "@/interfaces/quiz.interfaces"; 
+import { IQuizDb, ISendQuiz, IResultUserDataTable, IQuizUrl } from "@/interfaces/quiz.interfaces"; 
 import { IUser } from "@/interfaces/user.interfaces";
 import { useUserStore } from "@/store/user";
 import { ISendQuizTable, IIncomeQuizTable } from "@/interfaces/sentQuiz.interfaces";
@@ -52,6 +52,13 @@ export default class quizService {
 
         return Quizzes
     }
+
+    static async getQuizById(quizId: string): Promise<IQuizDb> {
+        const docRef = doc(db, "quizes", quizId);
+        const docSnap = await getDoc(docRef);
+
+        return docSnap.data() as IQuizDb
+    } 
 
     static async deleteQuizById(id: string): Promise<void> {
         
@@ -146,6 +153,6 @@ export default class quizService {
         return docRef.id
     }
 
-  
+   
 
 }

@@ -86,5 +86,9 @@
     "SentQuizesPlay": "Пройти",
     "SentQuizesDelete": "Видалити",
     "AnswersQuizSendToUser": "Відповіді доставлені користовачу",
-    "AllQuizes": "Всі квізи"             
+    "AllQuizes": "Всі квізи",
+    "UserMail": "Пошта",
+    "MailQuizUsername": "Пройдені квізи:",
+    "MailOpen": "Подивитися",
+    "QuizUrlIsCopyToClipboard": "Посилання скопійовано до буферу"               
 }   

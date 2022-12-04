@@ -3,10 +3,9 @@ import { computed, ref, onMounted, reactive } from 'vue'
 import quizService from '@/services/quiz.service'
 import { useUserStore } from '@/store/user'
 import { IQuizDb } from '@/interfaces/quiz.interfaces'
-import { VideoPlay, Delete, Edit, Promotion } from '@element-plus/icons-vue'
+import { VideoPlay, Delete, Edit, Promotion, Link } from '@element-plus/icons-vue'
 import QuestionDialog from '@/components/Dialogs/QuestionDialog.vue'
 import { useNotificationStore } from '@/store/notification'
-
 
 
 interface ICommand {
@@ -41,6 +40,12 @@ onMounted(async() => {
     dataQuizzes.Quizzes.push(...result)
     loading.value = false
 })
+
+const handleMakeLink = async(index: number, row: IQuizDb) => {
+  const quizUrl = `${document.URL}/urlpath/${row.id}`
+  navigator.clipboard.writeText(quizUrl)
+  notify.SetNofication('Success', 'QuizUrlIsCopyToClipboard', 'success')
+}
 
 const handleEdit = async (index: number, row: IQuizDb) => {
   emit('sendCommand', {command: 'EditQuiz', data: row})
@@ -80,6 +85,7 @@ const handleSend = async (index: number, row: IQuizDb) => {
       </template>
       <template #default="scope">
         <div class="control-buttons">
+            <el-button circle @click="handleMakeLink(scope.$index, scope.row)" :icon="Link"/>
             <el-button type="primary" circle @click="handleEdit(scope.$index, scope.row)" :icon="Edit"/>       
             <el-button type="success" circle @click="handleTest(scope.$index, scope.row)" :icon="VideoPlay"/>
             <el-button type="warning" circle @click="handleSend(scope.$index, scope.row)" :icon="Promotion"/>
@@ -100,6 +106,8 @@ const handleSend = async (index: number, row: IQuizDb) => {
 .control-buttons {
     display: flex;
     justify-content: end;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 </style>
