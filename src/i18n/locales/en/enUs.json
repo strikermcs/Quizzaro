@@ -90,5 +90,8 @@
     "UserMail": "Mail",
     "MailQuizUsername": "Passed quizzes:",
     "MailOpen": "Look",
-    "QuizUrlIsCopyToClipboard": "Link copied to clipboard" 
+    "QuizUrlIsCopyToClipboard": "Link copied to clipboard",
+    "WelcomePageBannerText": "Service for creating, passing, sending to other users, questionnaires (quizzes).", 
+    "WelcomePageLoginButton": "Login",
+    "WelcomePageRegisterButton": "Register"
 }   

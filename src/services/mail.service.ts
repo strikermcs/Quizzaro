@@ -3,7 +3,7 @@ import { collection, query, where, onSnapshot, updateDoc, doc } from "firebase/f
 import { useUserStore } from '@/store/user';
 import { IResultUserDataTable } from "@/interfaces/quiz.interfaces"; 
 
-export function subscribeToMail(update: Function) {
+export function subscribeToMail(callback: Function) {
     const userStore = useUserStore()
     const q = query(collection(db, "quizesResults"), where("userId", "==", userStore.user?.uid));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -12,7 +12,7 @@ export function subscribeToMail(update: Function) {
         querySnapshot.forEach((doc) => {
             results.push({id: doc.id, ...doc.data()} as IResultUserDataTable);
         });
-          update(results)
+          callback(results)
     });
 
 }

@@ -90,5 +90,8 @@
     "UserMail": "Пошта",
     "MailQuizUsername": "Пройдені квізи:",
     "MailOpen": "Подивитися",
-    "QuizUrlIsCopyToClipboard": "Посилання скопійовано до буферу"               
+    "QuizUrlIsCopyToClipboard": "Посилання скопійовано до буферу",
+    "WelcomePageBannerText": "Сервіс для створення, проходження, надсилання іншим користувачам, опитувальників (квізів).", 
+    "WelcomePageLoginButton": "Увійти",
+    "WelcomePageRegisterButton": "Регістрація"               
 }   

@@ -11,7 +11,7 @@ const resultsBoard = ref<IResultDataTableItem[]>([])
 const handleOpen = async(index: number, row: number) => {
     resultsBoard.value = props.data[index].quizRezult
     isResultBoard.value = true
-    await setMailIsRead(props.data[index].id)
+    await setMailIsRead(props.data[index].id as string)
 }
 
 const refreshHandle = () => {
