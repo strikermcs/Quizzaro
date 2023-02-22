@@ -1,0 +1,5 @@
+{
+    "rewrites": [
+        { "source": "/my_quizes/urlpath/:id", "destination": "/my_quizes/urlpath/:id" }
+    ]
+}
