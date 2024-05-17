@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import { Sunny, Moon } from '@element-plus/icons-vue'
 
-const theme = ref(localStorage.getItem('theme') || 'light')
+const theme = ref<string>(localStorage.getItem('theme') || 'light')
 
 const themeToggleHandler = () => {
     document.documentElement.classList.toggle('dark')
