@@ -19,7 +19,7 @@ const themeToggleHandler = () => {
 
 <template>
     <el-icon :size="30" class="theme-button" @click="themeToggleHandler">
-         <component :is="theme === 'dark' ? Sunny : Moon" />
+         <component :is="theme == 'dark' ? Sunny : Moon" />
     </el-icon>
 </template>
 

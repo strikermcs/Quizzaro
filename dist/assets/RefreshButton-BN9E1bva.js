@@ -1,0 +1,1 @@
+import{_ as s}from"./_plugin-vue_export-helper-CtXoblKC.js";import{c as t,o as _,j as n,h as e,w as a,i as c,am as r,E as p}from"./index-Cmehh-cC.js";const f={class:"refresh"},i=t({__name:"RefreshButton",setup(m){return(l,d)=>{const o=p;return _(),n("div",f,[e(o,{size:40},{default:a(()=>[e(c(r))]),_:1})])}}}),x=s(i,[["__scopeId","data-v-8956d850"]]);export{x as _};
