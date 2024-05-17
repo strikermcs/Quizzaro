@@ -1,23 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Sunny, Moon } from '@element-plus/icons-vue'
 
-const isDark = ref(false)
+const theme = ref(localStorage.getItem('theme') || 'light')
 
 const themeToggleHandler = () => {
-    document.querySelector('html')!.classList.toggle('dark')
-    if(document.querySelector('html')!.classList.contains('dark')){
-        isDark.value = true
-        return
+    document.documentElement.classList.toggle('dark')
+    if(theme.value === 'dark') {
+        localStorage.setItem('theme', 'light')
+        theme.value = 'light'
+    } else {
+        localStorage.setItem('theme', 'dark')
+        theme.value = 'dark'
     }
-    isDark.value = false
 }
 
 </script>
 
 <template>
     <el-icon :size="30" class="theme-button" @click="themeToggleHandler">
-         <component :is="isDark ? Sunny : Moon" />
+         <component :is="theme === 'dark' ? Sunny : Moon" />
     </el-icon>
 </template>
 

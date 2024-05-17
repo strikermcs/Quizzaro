@@ -8,7 +8,7 @@
   import { watch } from 'vue'
   import { useI18n } from "vue-i18n";
 
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   const userStore = useUserStore()
   const notify = useNotificationStore()
@@ -19,9 +19,16 @@
   })
 
   onBeforeMount(() => {
+
     onAuthStateChanged(auth, (user) => {
         userStore.user = user
     })
+
+    if(localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark')
+    }
+
+    locale.value = localStorage.getItem('locale') || 'UA'
   })
   
 </script>

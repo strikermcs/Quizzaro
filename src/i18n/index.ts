@@ -4,13 +4,13 @@ import uaUA from './locales/ua/uaUa.json'
 
 type MessageSchema = typeof enUS
 
-const i18n = createI18n<[MessageSchema], 'en-US' | 'ua-UA'>({
+const i18n = createI18n<[MessageSchema], 'US' | 'UA'>({
     legacy: false,
-    locale: 'ua-UA',
-    fallbackLocale: 'en-US',
+    locale: 'UA',
+    fallbackLocale: 'US',
     messages: {
-        'en-US': enUS,
-        'ua-UA': uaUA
+        'US': enUS,
+        'UA': uaUA
     }
 })
 
